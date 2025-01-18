@@ -1,59 +1,43 @@
-# Cookbook
+# Книга рецептов
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.0.
+## Как это выглядит
+https://github.com/user-attachments/assets/0987276e-193e-40fc-8a5d-765a6448b704
 
-## Development server
+## Где посмотреть и потыкать
+https://cookbook-flax.vercel.app/
 
-To start a local development server, run:
+## Стек
+Angular 19, TypeScript, Angular Material
 
-```bash
-ng serve
-```
+## 🧑‍💻 Технические требования
+- Реализация операций CRUD (создание, чтение, обновление, удаление).
+- Возможность работы с динамическими полями для компонентов рецепта.
+- Поддержка загрузки и отображения изображений (по желанию).
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### 🥗 Создание рецепта
+- **Обязательные поля**:
+  - Название рецепта.
+  - Динамическое количество компонентов рецепта, для каждого из которых можно указать:
+    - Название.
+    - Количество.
+    - Единицу измерения (выбирается из списка доступных или создаётся пользователем).
+  - Описание процесса приготовления.
+- **Дополнительно (опционально)**:
+  - Картинка, отображающая итоговый результат приготовления рецепта.
+ 
+### ✏️ Редактирование рецепта
+- **Поля для редактирования**:
+  - Все те же поля, что и при создании рецепта (название, компоненты, описание и т.д.).
+- **Дополнительно (опционально)**:
+  - Возможность редактировать изображение рецепта.
+  - Отображение текущего изображения рецепта (если реализовано).
+ 
+### 🗑️ Удаление рецепта
+- **Подтверждение**:
+  - Удаление рецепта должно сопровождаться подтверждением для предотвращения случайного удаления.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 📜 Полный список рецептов
+- **Отображение списка**:
+  - Название рецепта.
+  - Дата создания рецепта.
+  - Если в рецепте присутствует изображение, рядом с названием может отображаться миниатюра (необязательно).
