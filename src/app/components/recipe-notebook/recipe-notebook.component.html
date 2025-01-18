@@ -1,0 +1,136 @@
+<section class="container">
+  <h1 class="main-title">Книга рецептов</h1>
+
+  <mat-card>
+    <mat-card-title>Добавить рецепт</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="recipeForm" (ngSubmit)="addRecipe()">
+        <mat-card class="recipe-container">
+          <mat-card-title>Название</mat-card-title>
+          <mat-form-field appearance="fill" class="recipe-form">
+            <mat-label>Название рецепта</mat-label>
+            <input matInput formControlName="title" required>
+          </mat-form-field>
+        </mat-card>
+
+        <mat-card formArrayName="ingredients" class="recipe-container">
+          <mat-card-title>Ингредиенты</mat-card-title>
+          <div *ngFor="let ingredient of ingredients.controls; let i = index" [formGroupName]="i" class="recipe-form ingredients-group">
+            <mat-form-field appearance="fill" class="recipe-form">
+              <mat-label>Название ингредиента</mat-label>
+              <input matInput formControlName="name" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="recipe-form">
+              <mat-label>Количество</mat-label>
+              <input matInput type="number" formControlName="quantity" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="recipe-form">
+              <mat-label>Единица измерения</mat-label>
+              <mat-select formControlName="unit" required>
+                <mat-option *ngFor="let unit of units" [value]="unit">{{ unit }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <button mat-icon-button color="warn" (click)="removeIngredient(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <button
+            mat-raised-button
+            color="primary" type="button" (click)="addIngredient()"
+            style="margin: 20px"
+          >
+            Добавить ингредиент
+          </button>
+
+        </mat-card>
+
+
+        <mat-card class="recipe-container">
+          <mat-card-title>Как готовить</mat-card-title>
+
+          <mat-form-field appearance="fill" class="recipe-form">
+            <mat-label>Инструкция по приготовлению</mat-label>
+            <textarea matInput formControlName="instructions" required></textarea>
+          </mat-form-field>
+        </mat-card>
+
+
+        <mat-card class="recipe-container">
+          <mat-card-title>Сколько готовить</mat-card-title>
+
+          <mat-form-field appearance="fill" class="recipe-form">
+            <mat-label>Время приготовления</mat-label>
+            <input matInput formControlName="cookingTime" required>
+          </mat-form-field>
+        </mat-card>
+
+        <mat-card class="recipe-container">
+          <mat-card-title>Добавить изображение</mat-card-title>
+
+          <section class="recipe-form">
+            <input type="file" (change)="onImageSelected($event)" accept="image/*" style="margin-bottom: 20px">
+            <div *ngIf="previewImage" class="image-preview">
+              <mat-card-subtitle>Предварительный просмотр:</mat-card-subtitle>
+              <img [src]="previewImage" alt="Preview" style="max-width: 100%; height: auto;">
+            </div>
+          </section>
+        </mat-card>
+
+        <button
+          mat-raised-button
+          color="primary" type="submit"
+          style="width: 100%; margin: 20px auto"
+        >
+          Добавить рецепт
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="recipes.length > 0" style="margin-top: 20px">
+    <mat-card-title>Мои рецепты</mat-card-title>
+    <mat-card-content>
+      <div *ngFor="let recipe of recipes" class="recipe-item">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ recipe.title }}</mat-card-title>
+            <mat-card-subtitle>Время приготовления: {{ recipe.cookingTime }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <details>
+              <summary>Ингредиенты</summary>
+              <ul>
+                <li *ngFor="let ing of recipe.ingredients">
+                  {{ ing.name }} — {{ ing.quantity }} {{ ing.unit }}
+                </li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>Инструкция</summary>
+              <p>{{ recipe.instructions }}</p>
+            </details>
+
+            <details *ngIf="recipe.image">
+              <summary>Как выглядит</summary>
+              <img [src]="recipe.image" alt="Recipe Image" style="max-width: 100%; height: auto;">
+            </details>
+            <mat-card-subtitle>Дата создания: {{ recipe.createdAt | date: 'dd.MM.yyyy' }}</mat-card-subtitle>
+          </mat-card-content>
+          <div style="display: flex">
+            <mat-card-actions>
+              <button mat-button style="color: red" (click)="deleteRecipe(recipe.id)">Удалить</button>
+            </mat-card-actions>
+            <mat-card-actions>
+              <button mat-button (click)="editRecipe(recipe)">Редактировать</button>
+            </mat-card-actions>
+          </div>
+
+        </mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>

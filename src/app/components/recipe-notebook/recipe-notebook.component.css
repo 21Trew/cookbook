@@ -1,0 +1,44 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.main-title {
+  font-size: xx-large;
+  color: brown;
+}
+
+.recipe-container {
+  width: 100%;
+
+  .recipe-form {
+    width: auto;
+    margin: 0 20px;
+  }
+}
+
+mat-card-title {
+  color: dimgray;
+  margin: 3%;
+}
+
+.recipe-item {
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1vh;
+
+  .ingredients-group {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+mat-form-field {
+  width: fit-content;
+}
